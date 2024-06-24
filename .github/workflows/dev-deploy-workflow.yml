@@ -1,8 +1,19 @@
-name: Deploy bicep
-on: workflow_dispatch
+name: Target Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      param:
+        description: 'github_package_url'
+        required: true
+        default: 'default_value'
+
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Print input parameter
+        run: echo "Parameter value is ${{ github.event.inputs.param }}"
