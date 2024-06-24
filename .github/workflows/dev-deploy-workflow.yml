@@ -3,8 +3,24 @@ name: Target Workflow
 on:
   workflow_dispatch:
     inputs:
-      param:
+      github_package_url:
         description: 'github_package_url'
+        required: true
+        default: 'default_value'
+      github_artefact_id:
+        description: 'github_artefact_id'
+        required: true
+        default: 'default_value'
+      github_caller_workflow_run_id:
+        description: 'github_caller_workflow_run_id:'
+        required: true
+        default: 'default_value'
+      github_sha_id:
+        description: 'github_sha_id:'
+        required: true
+        default: 'default_value'
+      github_workflow_name:
+        description: 'github_workflow_name:'
         required: true
         default: 'default_value'
 
@@ -16,4 +32,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print input parameter
-        run: echo "Parameter value is ${{ github.event.inputs.param }}"
+        run: |
+            echo "Github Package Url is ${{ github.event.inputs.github_package_url }}"
+            echo "Artefact Id is ${{ github.event.inputs.github_artefact_id }}"
+            echo "Workflow Run Id is ${{ github.event.inputs.github_caller_workflow_run_id }}"
+            echo "Workflow SHA Id is ${{ github.event.inputs.github_sha_id }}"
+            echo "WorkflowName is ${{ github.event.inputs.github_workflow_name }}"
+
+
+    #   - name: Download artefacts
+    #     run: |
