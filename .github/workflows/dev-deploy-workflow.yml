@@ -27,9 +27,13 @@ on:
         description: 'github_repository_name:'
         required: true
         default: 'default_value'
+        
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  build:
+  bicep-deploy:
     runs-on: ubuntu-latest
     environment: "cgi-dev"
     env:
