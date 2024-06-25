@@ -39,6 +39,15 @@ jobs:
             echo "Workflow SHA Id is ${{ github.event.inputs.github_sha_id }}"
             echo "WorkflowName is ${{ github.event.inputs.github_workflow_name }}"
 
+      - name: Download artefacts
+        run: |
+          sudo mkdir /working_directory
+          sudo chmod 777 /working_directory
+          wget ${{ github.event.inputs.github_package_url }} -O /working_directory/package.zip
+          echo "unzip the file..."
+          cd /working_directory
+          7z x package.zip
 
-    #   - name: Download artefacts
-    #     run: |
+          ls working_directory
+          ls /working_directory/package
+
