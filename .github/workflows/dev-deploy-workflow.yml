@@ -31,7 +31,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: "cgi-dv"
+    environment: "cgi-dev"
     env:
       GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
