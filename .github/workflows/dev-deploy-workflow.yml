@@ -62,7 +62,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: /working_directory
-          github-token: $GITHUB_TOKEN
+          github-token: ${{ secrets.PAT_TOKEN }}
           repository: ${{ github.event.inputs.github_repository_name }}
           run-id: ${{ github.event.inputs.github_caller_workflow_run_id }}
 
