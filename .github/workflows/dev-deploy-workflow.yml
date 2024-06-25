@@ -71,7 +71,7 @@ jobs:
         shell: pwsh
         run: |
           ls /working_directory/bicep-package
-          bicep generate-params main.bicep
+          #bicep generate-params main.bicep
 
 
       # - name: Run Azure PS script
