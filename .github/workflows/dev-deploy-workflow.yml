@@ -27,7 +27,7 @@ on:
         description: 'github_repository_name:'
         required: true
         default: 'default_value'
-        
+
 permissions:
   id-token: write
   contents: read
@@ -108,4 +108,4 @@ jobs:
           template: /working_directory/bicep-package/main.bicep
           parameters: /working_directory/bicep-package/main.parameters.json environment=dv location=westeurope franchisee=abc location_shortname=weu
           failOnStdErr: true
-          additionalArguments: "--what-if"
+          #additionalArguments: "--what-if"
