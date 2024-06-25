@@ -23,10 +23,16 @@ on:
         description: 'github_workflow_name:'
         required: true
         default: 'default_value'
+      github_repository_name:
+        description: 'github_repository_name:'
+        required: true
+        default: 'default_value'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,16 +44,28 @@ jobs:
             echo "Workflow Run Id is ${{ github.event.inputs.github_caller_workflow_run_id }}"
             echo "Workflow SHA Id is ${{ github.event.inputs.github_sha_id }}"
             echo "WorkflowName is ${{ github.event.inputs.github_workflow_name }}"
+            echo "RepositoryName is ${{ github.event.inputs.github_repository_name }}"
 
-      - name: Download artefacts
+      - name: Create working Directory
         run: |
           sudo mkdir /working_directory
           sudo chmod 777 /working_directory
-          wget ${{ github.event.inputs.github_package_url }} -O /working_directory/package.zip
-          echo "unzip the file..."
-          cd /working_directory
-          7z x package.zip
+          #wget ${{ github.event.inputs.github_package_url }} -O /working_directory/package.zip
+          #echo "unzip the file..."
+          #cd /working_directory
+          #7z x package.zip
 
-          ls working_directory
-          ls /working_directory/package
+          #ls working_directory
+          #ls /working_directory/package
 
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: /working_directory
+          github-token: $GITHUB_TOKEN
+          repository: ${{ github.event.inputs.github_repository_name }}
+          run-id: ${{ github.event.inputs.github_caller_workflow_run_id }}
+
+      - name: List files
+        run: |
+          ls /working_directory
