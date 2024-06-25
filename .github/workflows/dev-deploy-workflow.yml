@@ -68,4 +68,12 @@ jobs:
 
       - name: List files
         run: |
-          ls /working_directory
+          ls /working_directory/bicep-package
+          echo "unzip the file..."
+          cd /working_directory/bicep-package
+          7z x bicep-package.zip
+
+          echo "----------------"
+          ls /working_directory/bicep-package
+          #ls working_directory
+          #ls /working_directory/package
